@@ -10,24 +10,26 @@ const reducer = (state={books:[]}, action) => {
     //return {books};
     return {books : [...state.books, ...action.payload]}
     break;
+
     case "DELETE_BOOK":
     const currentBookToDelete = [...state.books]
     const indexToDelete = currentBookToDelete.findIndex(
-      (book) => {
-        book.id === action.payload.id;
+      function(book) {
+        return book.id === action.payload.id;
       }
     )
-    return { books: [...currentBookToDelete.slice(0, indexToDelete),
+    return {books: [...currentBookToDelete.slice(0, indexToDelete),
     ...currentBookToDelete.slice(indexToDelete + 1)]}
     break;
   }
+  return state
 }
 
 //STEP1 create the store
 const store = createStore(reducer);
 
 store.subscribe(() => {
-  console.log('current state is ', store.getState());
+  console.log('current state is: ', store.getState());
   //console.log('current price', store.getState()[1].price);
 })
 
@@ -46,12 +48,11 @@ store.dispatch({
     title: 'this is the second book title',
     description: 'this is the second book description',
     price: 50
-  }
-]
+  }]
 })
 
 //dispatch second action
 store.dispatch({
-  type: "DELETE_BOOK",
-  payload: { id: 1 }
+  type:"DELETE_BOOK",
+  payload: {id: 1}
 })
