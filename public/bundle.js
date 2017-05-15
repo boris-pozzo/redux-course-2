@@ -756,21 +756,23 @@ var reducer = function reducer() {
       //return {books};
       return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) };
       break;
+
     case "DELETE_BOOK":
       var currentBookToDelete = [].concat(_toConsumableArray(state.books));
       var indexToDelete = currentBookToDelete.findIndex(function (book) {
-        book.id === action.payload.id;
+        return book.id === action.payload.id;
       });
       return { books: [].concat(_toConsumableArray(currentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(currentBookToDelete.slice(indexToDelete + 1))) };
       break;
   }
+  return state;
 };
 
 //STEP1 create the store
 var store = (0, _redux.createStore)(reducer);
 
 store.subscribe(function () {
-  console.log('current state is ', store.getState());
+  console.log('current state is: ', store.getState());
   //console.log('current price', store.getState()[1].price);
 });
 

@@ -8,7 +8,7 @@ const reducer = (state={books:[]}, action) => {
     case "POST_BOOK":
     //let books = state.books.concat(action.payload);
     //return {books};
-    return {books : [...state.books, ...action.payload]}
+    return {books: [...state.books, ...action.payload]}
     break;
 
     case "DELETE_BOOK":
