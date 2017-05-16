@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import {Provider} from 'react-redux';
 
  import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
@@ -19,7 +20,7 @@ import {postBooks, deleteBooks, updateBooks} from './actions/booksActions';
 const store = createStore(
   reducers,
   applyMiddleware(logger)
-)
+);
 
 // store.subscribe(() => {
 //   console.log('current state is: ', store.getState());
@@ -29,7 +30,9 @@ const store = createStore(
 import BooksList from './components/pages/BooksList';
 
 render(
-  <BooksList/>, document.getElementById('app')
+  <Provider store={store}>
+    <BooksList/>
+  </Provider>, document.getElementById('app')
 )
 
 
@@ -50,18 +53,18 @@ store.dispatch(postBooks(
 ))
 
 //DELETE a book
-store.dispatch(deleteBooks(
-  {id: 1}
-))
+// store.dispatch(deleteBooks(
+//   {id: 1}
+// ))
 
 //UPDATE a book
-store.dispatch(updateBooks(
-  {
-    id: 2,
-    title: 'Learn React in 1 month'
-  }
-))
+// store.dispatch(updateBooks(
+//   {
+//     id: 2,
+//     title: 'Learn React in 1 month'
+//   }
+// ))
 
 //-->> CART ACTIONS <<--
 //ADD to cart
-store.dispatch(addToCart([{id: 1}]))
+// store.dispatch(addToCart([{id: 1}]))
