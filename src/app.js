@@ -1,6 +1,9 @@
 "use strict"
 
-import { applyMiddleware, createStore } from 'redux';
+import React from 'react';
+import {render} from 'react-dom';
+
+ import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
 
 //IMPORT COMBINED REDUCERS
@@ -22,6 +25,12 @@ const store = createStore(
 //   console.log('current state is: ', store.getState());
 //   //console.log('current price', store.getState()[1].price);
 // })
+
+import BooksList from './components/pages/BooksList';
+
+render(
+  <BooksList/>, document.getElementById('app')
+)
 
 
 //STEP 2 create and dispatch actions
