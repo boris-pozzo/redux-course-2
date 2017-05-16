@@ -2,54 +2,13 @@
 
 import { createStore } from 'redux';
 
-//step 3 define reducers
-const reducer = (state={books:[]}, action) => {
-  switch(action.type) {
+//IMPORT COMBINED REDUCERS
+import reducers from './reducers/index';
 
 
-    case "POST_BOOK":
-    //let books = state.books.concat(action.payload);
-    //return {books};
-    return {books: [...state.books, ...action.payload]}
-    break;
-
-
-    case "DELETE_BOOK":
-    const currentBookToDelete = [...state.books]
-    const indexToDelete = currentBookToDelete.findIndex(
-      function(book) {
-        return book.id === action.payload.id;
-      }
-    )
-    return {books: [...currentBookToDelete.slice(0, indexToDelete),
-    ...currentBookToDelete.slice(indexToDelete + 1)]}
-    break;
-
-
-    case "UPDATE_BOOK":
-    const currentBookToUpdate = [...state.books]
-    const indexToUpdate = currentBookToUpdate.findIndex(
-      function(book){
-        return book.id === action.payload.id;
-      }
-    )
-    const newBookToUpdate = {
-      ...currentBookToUpdate[indexToUpdate],
-      title: action.payload.title
-    }
-    //console.log("What is it newBookToUpdate ", newBookToUpdate);
-
-    return {books: [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate,
-    ...currentBookToUpdate.slice(indexToUpdate + 1)]}
-    break;
-
-
-  }
-  return state
-}
 
 //STEP1 create the store
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 store.subscribe(() => {
   console.log('current state is: ', store.getState());
@@ -88,4 +47,11 @@ store.dispatch({
     id: 2,
     title: 'Learn React in 1 months'
   }
+})
+
+//-->> CART ACTIONS <<--
+//ADD to cart
+store.dispatch({
+  type: "ADD_TO_CART",
+  payload: [{id: 2}]
 })
