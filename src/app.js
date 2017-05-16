@@ -37,7 +37,7 @@ const reducer = (state={books:[]}, action) => {
       ...currentBookToUpdate[indexToUpdate],
       title: action.payload.title
     }
-    console.log("What is it newBookToUpdate ", newBookToUpdate);
+    //console.log("What is it newBookToUpdate ", newBookToUpdate);
 
     return {books: [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate,
     ...currentBookToUpdate.slice(indexToUpdate + 1)]}
@@ -59,7 +59,7 @@ store.subscribe(() => {
 
 //STEP 2 create and dispatch actions
 store.dispatch({
-  type: "POST_BOOK",
+  type:"POST_BOOK",
   payload: [{
     id: 1,
     title: 'this is the book title',
@@ -84,7 +84,7 @@ store.dispatch({
 //UPDATE a book
 store.dispatch({
   type: "UPDATE_BOOK",
-  payload: {
+  payload:{
     id: 2,
     title: 'Learn React in 1 months'
   }
