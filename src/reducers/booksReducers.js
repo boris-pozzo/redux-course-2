@@ -16,7 +16,7 @@ export function booksReducers(state={books:[]}, action) {
     const currentBookToDelete = [...state.books]
     const indexToDelete = currentBookToDelete.findIndex(
       function(book) {
-        return book.id === action.payload.id;
+        return book.id === action.payload.id
       }
     )
     return {books: [...currentBookToDelete.slice(0, indexToDelete),
@@ -28,7 +28,7 @@ export function booksReducers(state={books:[]}, action) {
     const currentBookToUpdate = [...state.books]
     const indexToUpdate = currentBookToUpdate.findIndex(
       function(book){
-        return book.id === action.payload.id;
+        return book.id === action.payload.id
       }
     )
     const newBookToUpdate = {
