@@ -9,7 +9,20 @@ import { Grid, Col, Row, Button } from 'react-bootstrap';
 class BooksList extends React.Component{
   componentDidMount(){
     //Dispatch an action
-    this.props.getbooks();
+    this.props.getbooks(
+      [{
+        id: 1,
+        title: 'this is the book title',
+        description: 'this is the book description',
+        price: 43.33
+      },
+      {
+        id: 2,
+        title: 'this is the second book title',
+        description: 'this is the second book description',
+        price: 60
+      }]
+    );
   }
   render(){
      const booksList = this.props.books.map(function(booksArr){
@@ -18,14 +31,16 @@ class BooksList extends React.Component{
           <h2>{booksArr.title}</h2>
           <h2>{booksArr.description}</h2>
           <h2>{booksArr.price}</h2>
+          <Button bsStyle='primary'>Buy now</Button>
         </div>
         )
      })
     return(
-      <div>
-        <h1>Hello React</h1>
+      <Grid>
+        <Row style={{marginTop: '15px'}}>
           {booksList}
-      </div>
+        </Row>
+      </Grid>
     )
   }
 }
